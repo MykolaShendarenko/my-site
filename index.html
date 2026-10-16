@@ -8,30 +8,24 @@
   </head>
 
   <body> 
+  <!-- Радіокнопки перемикання сторінок -->
   <input type="radio" name="page-tab" id="tab-home" class="page-controller" checked>
   <input type="radio" name="page-tab" id="tab-catalog" class="page-controller">
   <input type="radio" name="page-tab" id="tab-services" class="page-controller">
 
-  <!-- Б. Керуючі радіокнопки для фільтрації каталогу (Filter Controller) -->
+  <!-- Радіокнопки фільтрації каталогу -->
   <input type="radio" name="car-filter" id="filter-all" class="filter-controller" checked>
   <input type="radio" name="car-filter" id="filter-electric" class="filter-controller">
   <input type="radio" name="car-filter" id="filter-suv" class="filter-controller">
   <input type="radio" name="car-filter" id="filter-sport" class="filter-controller">
 
-  <!-- В. Чекбокс для мобільного меню (Burger Controller) -->
-  <input type="checkbox" id="burger-toggle" class="burger-controller">
-
-    <header class="Header">
+  <header class="header">
    <div class="nav-container">
      <label for="tab-home" class="logo">
       APEX<span class="logo-accent">MOTORS</span>
      </label>
-     <label for="burger-toggle" class="burger-icon" aria-label="Меню">
-        <span></span>
-        <span></span>
-        <span></span>
-     </label>
 
+     <!-- Навігаційне меню вкладками -->
      <nav class="nav-menu">
         <label for="tab-home" class="nav-tab-label">Головна</label>
         <label for="tab-catalog" class="nav-tab-label">Каталог авто</label>
@@ -41,8 +35,8 @@
   </header>
   
   <main>
+    <!-- СТОРІНКА 1: ГОЛОВНА -->
     <section id="view-home" class="page-section">
-      <!-- Головний промо-блок (Hero) -->
       <div class="container hero">
         <div class="hero-grid">
           <div>
@@ -62,7 +56,6 @@
         </div>
       </div>
 
-      <!-- Блок переваг компанії -->
       <div class="features-section">
         <div class="container">
           <h2 class="section-title">Чому обирають нас</h2>
@@ -95,13 +88,11 @@
     </section>
 
     <!-- СТОРІНКА 2: КАТАЛОГ АВТОМОБІЛІВ -->
-
     <section id="view-catalog" class="page-section">
       <div class="container catalog-section">
         <h2 class="section-title">Каталог моделей</h2>
         <p class="section-subtitle">Оберіть свій клас автомобіля</p>
 
-        <!-- Фільтри вибору категорії -->
         <div class="filter-bar">
           <label for="filter-all" class="filter-label">Всі моделі</label>
           <label for="filter-sport" class="filter-label">Спорткари</label>
@@ -109,9 +100,7 @@
           <label for="filter-electric" class="filter-label">Електромобілі</label>
         </div>
 
-        <!-- Сітка автомобілів (CSS Grid) -->
         <div class="catalog-grid">
-          <!-- Автомобіль 1 -->
           <article class="car-card" data-type="sport">
             <div class="car-img-wrap">
               <span class="car-tag">Спорткар</span>
@@ -131,7 +120,6 @@
             </div>
           </article>
 
-          <!-- Автомобіль 2 -->
           <article class="car-card" data-type="electric">
             <div class="car-img-wrap">
               <span class="car-tag">Електро</span>
@@ -151,7 +139,6 @@
             </div>
           </article>
 
-          <!-- Автомобіль 3 -->
           <article class="car-card" data-type="suv">
             <div class="car-img-wrap">
               <span class="car-tag">SUV</span>
@@ -171,7 +158,6 @@
             </div>
           </article>
 
-          <!-- Автомобіль 4 -->
           <article class="car-card" data-type="sport">
             <div class="car-img-wrap">
               <span class="car-tag">Спорткар</span>
@@ -194,8 +180,7 @@
       </div>
     </section>
 
-<!-- СТОРІНКА 3: ПОСЛУГИ ТА ФОРМА ЗАПИСУ -->
-
+    <!-- СТОРІНКА 3: ПОСЛУГИ ТА ФОРМА ЗАПИСУ -->
     <section id="view-services" class="page-section">
       <div class="container services-page">
         <h2 class="section-title">Сервіс та Запис на Тест-драйв</h2>
@@ -280,7 +265,6 @@
         </div>
       </div>
     </section>
-
   </main>
   
   <footer class="footer">
@@ -291,6 +275,5 @@
       </p>
     </div>
   </footer>
-  
  </body>
 </html>
