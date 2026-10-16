@@ -44,9 +44,8 @@ body {
   padding: 0 24px;
 }
 
-/* Приховані інпути для керування станами (Tabs, Filter, Burger) */
+/* Приховані інпути для керування сторінками та фільтрами */
 .page-controller,
-.burger-controller,
 .filter-controller {
   position: absolute;
   opacity: 0;
@@ -55,22 +54,24 @@ body {
 }
 
 /* ==========================================================================
-   2. ШАПКА (HEADER) ТА НАВІГАЦІЯ (Flexbox)
+   2. ШАПКА ТА НАВІГАЦІЯ
    ========================================================================== */
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(10, 12, 16, 0.92);
+  z-index: 1000;
+  background: rgba(10, 12, 16, 0.95);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-color);
-  height: var(--nav-height);
+  min-height: var(--nav-height);
+  display: flex;
+  align-items: center;
 }
 
 .nav-container {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  height: 100%;
   padding: 0 24px;
   display: flex;
   align-items: center;
@@ -78,7 +79,6 @@ body {
 }
 
 .logo {
-  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-main);
@@ -107,6 +107,7 @@ body {
   transition: var(--transition);
   user-select: none;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .nav-tab-label:hover {
@@ -114,36 +115,14 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Гамбургер-іконка для смартфонів */
-.burger-icon {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.burger-icon span {
-  width: 100%;
-  height: 2px;
-  background-color: var(--text-main);
-  border-radius: 2px;
-  transition: var(--transition);
-}
-
 /* ==========================================================================
-   3. ПЕРЕМИКАННЯ СТОРІНОК (Pure CSS Tabs через :checked)
+   3. ПЕРЕМИКАННЯ СТОРІНОК
    ========================================================================== */
 #tab-home:checked ~ .header .nav-tab-label[for="tab-home"],
 #tab-catalog:checked ~ .header .nav-tab-label[for="tab-catalog"],
 #tab-services:checked ~ .header .nav-tab-label[for="tab-services"] {
   color: var(--accent);
-  background: rgba(230, 57, 70, 0.1);
+  background: rgba(230, 57, 70, 0.12);
 }
 
 .page-section {
@@ -166,7 +145,7 @@ main {
   flex: 1;
 }
 
-/* Загальні елементи: кнопки, заголовки */
+/* Кнопки та типографіка */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -207,7 +186,6 @@ main {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 12px;
-  font-family: 'Space Grotesk', sans-serif;
 }
 
 .section-subtitle {
@@ -216,7 +194,7 @@ main {
 }
 
 /* ==========================================================================
-   4. СТОРІНКА 1: ГОЛОВНА (CSS Grid)
+   4. ГОЛОВНА
    ========================================================================== */
 .hero {
   padding: 60px 0 80px;
@@ -248,7 +226,6 @@ main {
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 24px;
-  font-family: 'Space Grotesk', sans-serif;
 }
 
 .hero-desc {
@@ -316,7 +293,7 @@ main {
 }
 
 /* ==========================================================================
-   5. СТОРІНКА 2: КАТАЛОГ (CSS Grid + Фільтрація без JS)
+   5. КАТАЛОГ
    ========================================================================== */
 .catalog-section {
   padding: 50px 0 80px;
@@ -448,10 +425,8 @@ main {
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--accent);
-  font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Логіка фільтрації карток на чистому CSS */
 #filter-electric:checked ~ * .car-card:not([data-type="electric"]),
 #filter-suv:checked ~ * .car-card:not([data-type="suv"]),
 #filter-sport:checked ~ * .car-card:not([data-type="sport"]) {
@@ -459,7 +434,7 @@ main {
 }
 
 /* ==========================================================================
-   6. СТОРІНКА 3: ПОСЛУГИ ТА ФОРМА ЗАПИСУ
+   6. ПОСЛУГИ ТА ФОРМА
    ========================================================================== */
 .services-page {
   padding: 50px 0 80px;
@@ -533,7 +508,7 @@ main {
 }
 
 /* ==========================================================================
-   7. ПІДВАЛ (FOOTER)
+   7. ПІДВАЛ
    ========================================================================== */
 .footer {
   border-top: 1px solid var(--border-color);
@@ -551,9 +526,8 @@ main {
 }
 
 /* ==========================================================================
-   8. АДАПТИВНІСТЬ ТА МЕДІАЗАПИТИ (@media)
+   8. АДАПТИВНІСТЬ ДЛЯ СМАРТФОНІВ ТА ПЛАНШЕТІВ
    ========================================================================== */
-/* Планшети (до 1024px) */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -571,67 +545,50 @@ main {
   }
 }
 
-/* Мобільні пристрої (до 768px) */
+/* Мобільне відображення вкладок */
 @media (max-width: 768px) {
-  /* 1. Делаем кнопку-бургер видимой и кликабельной */
-  .burger-icon {
-    display: flex;
-    position: relative;
-    z-index: 102; /* Кнопка всегда выше самого меню */
-    cursor: pointer;
+  .header {
+    height: auto;
+    padding: 14px 0 10px;
   }
 
-  /* 2. Стили выпадающего мобильного меню */
-  .nav-menu {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    background-color: #0d1017;
+  .nav-container {
     flex-direction: column;
-    padding: 24px 16px;
-    gap: 12px;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
-    z-index: 101; /* Выше всего контента страницы */
-    
-    /* Начальное скрытое состояние */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-30px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-    pointer-events: none; /* Чтобы в скрытом виде нельзя было случайно нажать */
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px;
   }
 
-  /* 3. Открытие меню при активном чекбоксе */
-  #burger-toggle:checked ~ .header .nav-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  /* 4. Анимация превращения полосок в крестик (X) */
-  #burger-toggle:checked ~ .header .burger-icon span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  #burger-toggle:checked ~ .header .burger-icon span:nth-child(2) {
-    opacity: 0;
-  }
-  #burger-toggle:checked ~ .header .burger-icon span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  /* Пункты меню растягиваем на всю ширину */
-  .nav-tab-label {
+  /* Горизонтальна смужка вкладок */
+  .nav-menu {
+    display: flex;
     width: 100%;
-    text-align: center;
-    padding: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+  }
+
+  /* Приховуємо скроллбар для охайного вигляду */
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-menu {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .nav-tab-label {
+    padding: 8px 14px;
+    font-size: 0.88rem;
     background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    flex-shrink: 0;
   }
 }
 
-/* Компактні екрани (до 480px) */
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2rem;
