@@ -1,0 +1,646 @@
+/* ==========================================================================
+   1. СКИДАННЯ, ЗМІННІ ТА БАЗОВІ НАЛАШТУВАННЯ
+   ========================================================================== */
+:root {
+  --bg-dark: #0a0c10;
+  --bg-card: #141821;
+  --bg-card-hover: #1b212e;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --accent: #e63946;
+  --accent-hover: #ff4d5a;
+  --text-main: #f1faee;
+  --text-muted: #8d99ae;
+  --nav-height: 80px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo,
+.hero-title,
+.section-title,
+.car-price {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Приховані інпути для керування станами (Tabs, Filter, Burger) */
+.page-controller,
+.burger-controller,
+.filter-controller {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* ==========================================================================
+   2. ШАПКА (HEADER) ТА НАВІГАЦІЯ (Flexbox)
+   ========================================================================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 12, 16, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-color);
+  height: var(--nav-height);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-accent {
+  color: var(--accent);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-tab-label {
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+  user-select: none;
+  display: inline-block;
+}
+
+.nav-tab-label:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Гамбургер-іконка для смартфонів */
+.burger-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.burger-icon span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ==========================================================================
+   3. ПЕРЕМИКАННЯ СТОРІНОК (Pure CSS Tabs через :checked)
+   ========================================================================== */
+#tab-home:checked ~ .header .nav-tab-label[for="tab-home"],
+#tab-catalog:checked ~ .header .nav-tab-label[for="tab-catalog"],
+#tab-services:checked ~ .header .nav-tab-label[for="tab-services"] {
+  color: var(--accent);
+  background: rgba(230, 57, 70, 0.1);
+}
+
+.page-section {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#tab-home:checked ~ main #view-home,
+#tab-catalog:checked ~ main #view-catalog,
+#tab-services:checked ~ main #view-services {
+  display: block;
+}
+
+main {
+  flex: 1;
+}
+
+/* Загальні елементи: кнопки, заголовки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+/* ==========================================================================
+   4. СТОРІНКА 1: ГОЛОВНА (CSS Grid)
+   ========================================================================== */
+.hero {
+  padding: 60px 0 80px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(230, 57, 70, 0.15);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  color: #ff6b77;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-img-box {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.hero-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.hero-img-box:hover img {
+  transform: scale(1.03);
+}
+
+.features-section {
+  padding: 60px 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   5. СТОРІНКА 2: КАТАЛОГ (CSS Grid + Фільтрація без JS)
+   ========================================================================== */
+.catalog-section {
+  padding: 50px 0 80px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  background: var(--bg-card);
+  padding: 8px;
+  border-radius: 12px;
+  width: fit-content;
+  border: 1px solid var(--border-color);
+}
+
+.filter-label {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+#filter-all:checked ~ * .filter-label[for="filter-all"],
+#filter-electric:checked ~ * .filter-label[for="filter-electric"],
+#filter-suv:checked ~ * .filter-label[for="filter-suv"],
+#filter-sport:checked ~ * .filter-label[for="filter-sport"] {
+  background: var(--accent);
+  color: white;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.car-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.car-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.car-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.car-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.car-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(10, 12, 16, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.car-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.car-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.spec-item small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.spec-item span {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.car-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.car-price {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Логіка фільтрації карток на чистому CSS */
+#filter-electric:checked ~ * .car-card:not([data-type="electric"]),
+#filter-suv:checked ~ * .car-card:not([data-type="suv"]),
+#filter-sport:checked ~ * .car-card:not([data-type="sport"]) {
+  display: none;
+}
+
+/* ==========================================================================
+   6. СТОРІНКА 3: ПОСЛУГИ ТА ФОРМА ЗАПИСУ
+   ========================================================================== */
+.services-page {
+  padding: 50px 0 80px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.service-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 48px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: #0d1017;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: white;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+}
+
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.contact-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+/* ==========================================================================
+   7. ПІДВАЛ (FOOTER)
+   ========================================================================== */
+.footer {
+  border-top: 1px solid var(--border-color);
+  background: #07080b;
+  padding: 40px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   8. АДАПТИВНІСТЬ ТА МЕДІАЗАПИТИ (@media)
+   ========================================================================== */
+/* Планшети (до 1024px) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .hero-img-box {
+    max-height: 400px;
+  }
+  .booking-grid {
+    grid-template-columns: 1fr;
+    padding: 32px;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Мобільні пристрої (до 768px) */
+@media (max-width: 768px) {
+  /* 1. Делаем кнопку-бургер видимой и кликабельной */
+  .burger-icon {
+    display: flex;
+    position: relative;
+    z-index: 102; /* Кнопка всегда выше самого меню */
+    cursor: pointer;
+  }
+
+  /* 2. Стили выпадающего мобильного меню */
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background-color: #0d1017;
+    flex-direction: column;
+    padding: 24px 16px;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
+    z-index: 101; /* Выше всего контента страницы */
+    
+    /* Начальное скрытое состояние */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-30px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    pointer-events: none; /* Чтобы в скрытом виде нельзя было случайно нажать */
+  }
+
+  /* 3. Открытие меню при активном чекбоксе */
+  #burger-toggle:checked ~ .header .nav-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* 4. Анимация превращения полосок в крестик (X) */
+  #burger-toggle:checked ~ .header .burger-icon span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  #burger-toggle:checked ~ .header .burger-icon span:nth-child(2) {
+    opacity: 0;
+  }
+  #burger-toggle:checked ~ .header .burger-icon span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Пункты меню растягиваем на всю ширину */
+  .nav-tab-label {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+/* Компактні екрани (до 480px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .btn {
+    width: 100%;
+  }
+  .specs-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

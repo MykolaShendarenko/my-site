@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Motors — Автосалон</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body> 
+  <input type="radio" name="page-tab" id="tab-home" class="page-controller" checked>
+  <input type="radio" name="page-tab" id="tab-catalog" class="page-controller">
+  <input type="radio" name="page-tab" id="tab-services" class="page-controller">
+
+  <!-- Б. Керуючі радіокнопки для фільтрації каталогу (Filter Controller) -->
+  <input type="radio" name="car-filter" id="filter-all" class="filter-controller" checked>
+  <input type="radio" name="car-filter" id="filter-electric" class="filter-controller">
+  <input type="radio" name="car-filter" id="filter-suv" class="filter-controller">
+  <input type="radio" name="car-filter" id="filter-sport" class="filter-controller">
+
+  <!-- В. Чекбокс для мобільного меню (Burger Controller) -->
+  <input type="checkbox" id="burger-toggle" class="burger-controller">
+
+    <header class="Header">
+   <div class="nav-container">
+     <label for="tab-home" class="logo">
+      APEX<span class="logo-accent">MOTORS</span>
+     </label>
+     <label for="burger-toggle" class="burger-icon" aria-label="Меню">
+        <span></span>
+        <span></span>
+        <span></span>
+     </label>
+
+     <nav class="nav-menu">
+        <label for="tab-home" class="nav-tab-label">Головна</label>
+        <label for="tab-catalog" class="nav-tab-label">Каталог авто</label>
+        <label for="tab-services" class="nav-tab-label">Послуги та Контакти</label>
+      </nav>
+   </div>
+  </header>
+  
+  <main>
+    <section id="view-home" class="page-section">
+      <!-- Головний промо-блок (Hero) -->
+      <div class="container hero">
+        <div class="hero-grid">
+          <div>
+            <span class="badge">Нова лінійка 2026</span>
+            <h1 class="hero-title">Майбутнє динаміки та розкоші</h1>
+            <p class="hero-desc">
+              Відчуйте безкомпромісну потужність спортивних купе та інноваційність флагманських електрокарів. Оберіть свій Apex сьогодні.
+            </p>
+            <div class="btn-group">
+              <label for="tab-catalog" class="btn btn-primary">Переглянути каталог</label>
+              <label for="tab-services" class="btn btn-outline">Запис на тест-драйв</label>
+            </div>
+          </div>
+          <div class="hero-img-box">
+            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80" alt="Apex GT Supercar">
+          </div>
+        </div>
+      </div>
+
+      <!-- Блок переваг компанії -->
+      <div class="features-section">
+        <div class="container">
+          <h2 class="section-title">Чому обирають нас</h2>
+          <p class="section-subtitle">Стандарти якості офіційного імпортера</p>
+          <div class="features-grid">
+            <div class="feature-card">
+              <span class="feature-icon">⚡</span>
+              <h3>Офіційна гарантія 5 років</h3>
+              <p style="color: var(--text-muted); margin-top: 10px;">
+                Повна технічна підтримка та гарантійне обслуговування силових установок та батарейних модулів.
+              </p>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🛡️</span>
+              <h3>Сертифікований сервіс</h3>
+              <p style="color: var(--text-muted); margin-top: 10px;">
+                Оригінальні деталі, комп'ютерні діагностичні стенди бренду та сертифіковані інженери.
+              </p>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🏎️</span>
+              <h3>Програма Trade-In</h3>
+              <p style="color: var(--text-muted); margin-top: 10px;">
+                Швидка оцінка вашого поточного авто та перерахунок вартості нового прямо в шоурумі.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- СТОРІНКА 2: КАТАЛОГ АВТОМОБІЛІВ -->
+
+    <section id="view-catalog" class="page-section">
+      <div class="container catalog-section">
+        <h2 class="section-title">Каталог моделей</h2>
+        <p class="section-subtitle">Оберіть свій клас автомобіля</p>
+
+        <!-- Фільтри вибору категорії -->
+        <div class="filter-bar">
+          <label for="filter-all" class="filter-label">Всі моделі</label>
+          <label for="filter-sport" class="filter-label">Спорткари</label>
+          <label for="filter-suv" class="filter-label">Позашляховики</label>
+          <label for="filter-electric" class="filter-label">Електромобілі</label>
+        </div>
+
+        <!-- Сітка автомобілів (CSS Grid) -->
+        <div class="catalog-grid">
+          <!-- Автомобіль 1 -->
+          <article class="car-card" data-type="sport">
+            <div class="car-img-wrap">
+              <span class="car-tag">Спорткар</span>
+              <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" alt="Apex Monza GT">
+            </div>
+            <div class="car-body">
+              <h3 class="car-name">Apex Monza GT</h3>
+              <div class="specs-grid">
+                <div class="spec-item"><small>0-100</small><span>3.1 с</span></div>
+                <div class="spec-item"><small>Потужність</small><span>640 к.с.</span></div>
+                <div class="spec-item"><small>Двигун</small><span>4.0L V8</span></div>
+              </div>
+              <div class="car-footer">
+                <span class="car-price">$145,000</span>
+                <label for="tab-services" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">Замовити</label>
+              </div>
+            </div>
+          </article>
+
+          <!-- Автомобіль 2 -->
+          <article class="car-card" data-type="electric">
+            <div class="car-img-wrap">
+              <span class="car-tag">Електро</span>
+              <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80" alt="Apex Volt Aero">
+            </div>
+            <div class="car-body">
+              <h3 class="car-name">Apex Volt Aero</h3>
+              <div class="specs-grid">
+                <div class="spec-item"><small>0-100</small><span>2.7 с</span></div>
+                <div class="spec-item"><small>Запас ходу</small><span>620 км</span></div>
+                <div class="spec-item"><small>Батарея</small><span>100 кВт</span></div>
+              </div>
+              <div class="car-footer">
+                <span class="car-price">$110,000</span>
+                <label for="tab-services" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">Замовити</label>
+              </div>
+            </div>
+          </article>
+
+          <!-- Автомобіль 3 -->
+          <article class="car-card" data-type="suv">
+            <div class="car-img-wrap">
+              <span class="car-tag">SUV</span>
+              <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80" alt="Apex Terra X">
+            </div>
+            <div class="car-body">
+              <h3 class="car-name">Apex Terra X-Force</h3>
+              <div class="specs-grid">
+                <div class="spec-item"><small>0-100</small><span>4.4 с</span></div>
+                <div class="spec-item"><small>Потужність</small><span>510 к.с.</span></div>
+                <div class="spec-item"><small>Привід</small><span>AWD</span></div>
+              </div>
+              <div class="car-footer">
+                <span class="car-price">$128,000</span>
+                <label for="tab-services" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">Замовити</label>
+              </div>
+            </div>
+          </article>
+
+          <!-- Автомобіль 4 -->
+          <article class="car-card" data-type="sport">
+            <div class="car-img-wrap">
+              <span class="car-tag">Спорткар</span>
+              <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Apex Spectre S">
+            </div>
+            <div class="car-body">
+              <h3 class="car-name">Apex Spectre S</h3>
+              <div class="specs-grid">
+                <div class="spec-item"><small>0-100</small><span>3.4 с</span></div>
+                <div class="spec-item"><small>Потужність</small><span>580 к.с.</span></div>
+                <div class="spec-item"><small>Двигун</small><span>Biturbo</span></div>
+              </div>
+              <div class="car-footer">
+                <span class="car-price">$132,000</span>
+                <label for="tab-services" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">Замовити</label>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<!-- СТОРІНКА 3: ПОСЛУГИ ТА ФОРМА ЗАПИСУ -->
+
+    <section id="view-services" class="page-section">
+      <div class="container services-page">
+        <h2 class="section-title">Сервіс та Запис на Тест-драйв</h2>
+        <p class="section-subtitle">Отримайте персональну консультацію або протестуйте авто на треку</p>
+
+        <div class="services-grid">
+          <div class="service-box">
+            <h3>🔩 Офіційне ТО</h3>
+            <p style="color: var(--text-muted); margin-top: 8px;">
+              Повний регламентний огляд, діагностика гальмівної системи та оновлення ПЗ авто.
+            </p>
+          </div>
+          <div class="service-box">
+            <h3>⚡ Зарядні станції</h3>
+            <p style="color: var(--text-muted); margin-top: 8px;">
+              Встановлення та підключення домашніх фірмових станцій швидкісного живлення Wallbox.
+            </p>
+          </div>
+          <div class="service-box">
+            <h3>💼 Фінансовий лізинг</h3>
+            <p style="color: var(--text-muted); margin-top: 8px;">
+              Індивідуальні лізингові пропозиції від перевірених банківських партнерів.
+            </p>
+          </div>
+        </div>
+
+        <div class="booking-grid">
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Забронювати виїзд</h3>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">
+              Заповніть форму нижче, і наш фахівець зв'яжеться з вами для уточнення дати заїзду.
+            </p>
+            <form action="#" method="GET">
+              <div class="form-group">
+                <label for="client-name">Ваше ім'я</label>
+                <input type="text" id="client-name" class="form-input" placeholder="Ваше Ім'я" required>
+              </div>
+              <div class="form-group">
+                <label for="client-phone">Номер телефону</label>
+                <input type="tel" id="client-phone" class="form-input" placeholder="+380 (99) 000-00-00" required>
+              </div>
+              <div class="form-group">
+                <label for="car-select">Оберіть модель</label>
+                <select id="car-select" class="form-select">
+                  <option>Apex Monza GT</option>
+                  <option>Apex Volt Aero</option>
+                  <option>Apex Terra X-Force</option>
+                  <option>Apex Spectre S</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Підтвердити запис</button>
+            </form>
+          </div>
+
+          <div style="border-left: 1px solid var(--border-color); padding-left: 20px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Контактна інформація</h3>
+            <p style="color: var(--text-muted);">Чекаємо на вас у нашому флагманському шоурумі щодня з 09:00 до 20:00.</p>
+            <div class="contacts-list">
+              <div class="contact-item">
+                <span style="font-size: 1.3rem;">📍</span>
+                <div>
+                  <strong>Адреса</strong>
+                  <p style="color: var(--text-muted);">м. Київ, Кільцева дорога, 110</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span style="font-size: 1.3rem;">📞</span>
+                <div>
+                  <strong>Телефон</strong>
+                  <p style="color: var(--text-muted);">+380 (44) 123-45-67</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span style="font-size: 1.3rem;">✉️</span>
+                <div>
+                  <strong>Електронна пошта</strong>
+                  <p style="color: var(--text-muted);">concierge@apexmotors.ua</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo">APEX<span class="logo-accent">MOTORS</span></div>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        © 2026 Apex Motors. Усі права захищено. Без використання JavaScript.
+      </p>
+    </div>
+  </footer>
+  
+ </body>
+</html>
